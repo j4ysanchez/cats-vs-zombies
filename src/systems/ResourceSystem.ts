@@ -63,7 +63,8 @@ export class ResourceSystem {
     const y = GRID_ORIGIN_Y + row * CELL_SIZE + CELL_SIZE / 2;
 
     const drop = new Fish(this.scene, x, y);
-    drop.on('pointerdown', () => {
+    drop.on('pointerdown', (_ptr: Phaser.Input.Pointer, _lx: number, _ly: number, event: Phaser.Types.Input.EventData) => {
+      event.stopPropagation();
       if (!drop.collected) {
         drop.collect();
         this.collect(drop.value);
